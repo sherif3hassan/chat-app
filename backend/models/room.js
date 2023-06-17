@@ -1,15 +1,43 @@
 // import mongoose
+import User from "./user.js";
 import mongoose from "mongoose";
 
-// User model and schema
-const messageSchema = new mongoose.Schema({
-    senderId: mongoose.Schema.Types.ObjectId,
-    text: String,
-  });
-
 const roomSchema = new mongoose.Schema({
-  usersId: [mongoose.Schema.Types.ObjectId],
-  messagesId: [messageSchema],
+  name: {
+    type: String,
+    required: true,
+  },
+  members: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        validate: {
+          validator: async (value) => {
+            const exists = await User.findById(value);
+            return exists !== null;
+          },
+        },
+      },
+    ],
+    default: [],
+  },
+  messages: {
+    type: [
+      {
+        text: String,
+        senderId: {
+          type: mongoose.Schema.Types.ObjectId,
+          validate: {
+            validator: async (value) => {
+              const exists = await User.findById(value);
+              return exists !== null;
+            },
+          },
+        },
+      },
+    ],
+    default: [],
+  },
 });
 
 // create the model for users and expose it to our app
