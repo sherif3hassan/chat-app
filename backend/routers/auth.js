@@ -11,6 +11,12 @@ router.post("/register", (req, res) => {
   res.send("Register");
 });
 
+router.post("/create-session", (req, res) => {
+  req.session.user = req.body;
+  res.send({
+    message: "Session created",
+  });
+});
 
 // Get the current logged in user
 router.get("/me", async (req, res) => {
