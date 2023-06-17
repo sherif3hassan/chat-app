@@ -1,6 +1,10 @@
 // Connect to mongoDB
 import mongoose from "mongoose";
 
+// Load env variables
+import dotenv from "dotenv";
+dotenv.config();
+
 try {
   const conn = await mongoose.connect(process.env.MONGODB_URI);
 
