@@ -18,6 +18,10 @@ router.post("/register", (req, res) => {
 
 router.post("/logout", (req, res) => {
   res.send("Logout");
+
+router.post("/logout", async (req, res) => {
+  req.session.destroy();
+  res.send("Logged out");
 });
 
 export default router;
