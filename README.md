@@ -27,5 +27,5 @@ npm run dev
 4. Start vite (frontend)
 
 ```bash
-npm run start
+npm run dev
 ```
