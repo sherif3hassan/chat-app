@@ -3,11 +3,6 @@ import { Router } from "express";
 
 const router = Router();
 
-// Get the current logged in user
-router.get("/me", (req, res) => {
-  res.send("Me");
-});
-
 router.post("/login", (req, res) => {
   res.send("Login");
 });
@@ -16,8 +11,20 @@ router.post("/register", (req, res) => {
   res.send("Register");
 });
 
-router.post("/logout", (req, res) => {
-  res.send("Logout");
+
+// Get the current logged in user
+router.get("/me", async (req, res) => {
+  const session = req.session;
+  if (session && session.user) {
+    res.send({
+      user: session.user,
+    });
+  } else {
+    res.send({
+      user: null,
+    });
+  }
+});
 
 router.post("/logout", async (req, res) => {
   req.session.destroy();
