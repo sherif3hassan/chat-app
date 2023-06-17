@@ -1,16 +1,9 @@
-// Connect to mongoDB
-import mongoose from "mongoose";
+// Create Express server
+import express from "express";
 
-// Load env variables
-import dotenv from "dotenv";
-dotenv.config();
+// Create Express app
+const app = express();
 
-try {
-  const conn = await mongoose.connect(process.env.MONGODB_URI);
 
-  console.log(`MongoDB connected: ${conn.connection.host}`);
-} catch (err) {
-  console.error(`MongoDB not connected: ${err.message}`);
-  // Exit with failure
-  process.exit(1);
-}
+// Start the Express server
+app.listen(3000, () => console.log("Server running on port 3000!"));
