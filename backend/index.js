@@ -20,6 +20,12 @@ app.use(
 // use cookie parser middleware to parse cookies
 app.use(cookieParser());
 
+// use the json middleware to parse request bodies
+app.use(express.json());
+
+// use the urlencoded middleware to parse forms data
+app.use(express.urlencoded({ extended: true }));
+
 // use the auth router
 app.use("/auth", authRouter);
 
